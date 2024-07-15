@@ -11,43 +11,44 @@ const getJoyasHATEOAS = async ({limits=6, order_by='precio_ASC', page = 1})=>{
       return response.rows;
     }
   } catch (error) {
-    // console.log('Error', error.code, 'Error message', error.message);
+    console.log('Error', error.code, 'Error message', error.message);
   }
 }
 
-const getJoyasFiltros = async ({precio_min, precio_max, categoria, metal}) => {
+const getJoyasFiltros = async ({precio_min=10000, precio_max=42000, categoria, metal}) => {
   let filtros = [];
-  let values = [];
-    
+  const values = [];
+
+  const agregarFiltro = (campo, comparador, valor) => {
+    values.push(valor)
+    filtros.push(`${campo} ${comparador} $${filtros.length + 1}`)
+  }
+  
   if (precio_min) {
-    filtros.push('precio', '>=', '%s');
-    values.push(precio_min);
+    agregarFiltro('precio', '>=', precio_min);
   }
   if (precio_max) {
-    filtros.push('precio', '<=', '%s');
-    values.push(precio_max);
+    agregarFiltro('precio', '<=', precio_max);
   }
   if (categoria) {
-    filtros.push('categoria', '=', '%s');
-    values.push(`'${categoria}'`);
+    agregarFiltro('categoria', 'ILIKE', `%${categoria}%`);
   }
   if (metal) {
-    filtros.push('metal', '=', '%s');
-    values.push(`'${metal}'`);
+    agregarFiltro('metal', 'ILIKE', `%${metal}%`);
   }
+    
 
   let query = "SELECT * FROM inventario";
   if (filtros.length > 0) {
-    query += ` WHERE ${filtros.join("AND")}`;
+    query += ` WHERE ${filtros.join(' AND ')}`;
   };
   try {
-    const formattedQuery = format(query, ...values);
-    const response = await pool.query(formattedQuery);
+    const response = await pool.query(query, values);
     if (response.rowCount > 0) {
       return response.rows;
     } 
   } catch (error) {
-    // console.log('Error', error.code, 'Error message', error.message);
+    console.log('Error', error.code, 'Error message', error.message);
   }
 }
 
