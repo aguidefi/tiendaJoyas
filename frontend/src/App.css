@@ -1,42 +1,105 @@
-#root {
-  max-width: 1280px;
+* {
+  box-sizing: border-box;
   margin: 0 auto;
-  padding: 2rem;
+  padding: 0;
   text-align: center;
+  color: #212429;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+/*NAVBAR*/
+
+.header {
+  display: flex;
+  background-color: #9CDBA6;
+  align-items: center;
+  height: 10vh;
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.header .brand {
+  cursor: pointer;
+  margin-left: 40px;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
+.header .brand img {
+  height: 50px;
+  transition: all 0.3s;
 }
 
-.card {
-  padding: 2em;
+.header .brand img:hover {
+  transform: scale(1.2);
 }
 
-.read-the-docs {
-  color: #888;
+.header .nav-links{
+  margin-right: 30px;
+}
+
+.header .nav-links li{
+  display: inline-block;
+  padding: 0 15px;
+  font-size: 35px;
+}
+
+.header .nav-links li:hover{
+  transform: scale(1.1);
+}
+
+.header .nav-links a{
+  font-size: 20px;
+  text-decoration: none;
+}
+
+.active{
+  color:#468585;
+  text-shadow: 1px 1px 2px #50B498;
+}
+
+.disabled{
+  color: #DEF9C4;
+  opacity: 4;
+}
+
+/*HOME*/
+
+.joya-home{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-image: url("./assets/fondojoya.jpg");
+  background-size: cover;
+  width: 100vw;
+  height: 90vh;
+}
+
+.joya-home h2{
+  font-family: sans-serif;
+  font-size: 80px;
+  color: #468585
+}
+
+.joya-home p{
+  font-family: sans-serif;
+  font-size: 20px;
+  color: #468585
+}
+
+.joya-home button{
+  font-family: sans-serif;
+  font-size: 15px;
+  color: #468585;
+  background-color: #9CDBA6;
+}
+
+/*JOYAS*/
+
+.mostrar-container{
+  font-family: sans-serif;
+  padding: 30px;
+  background-color: #DEF9C4;
+  width: 100vw;
+  height: 90vh;
+}
+
+.mostrar-container li{
+  font-size: 30px;
+  color: #468585;
 }
